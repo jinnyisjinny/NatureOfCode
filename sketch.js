@@ -55,8 +55,10 @@ class Walker {
     if (prob < 0.5) {
       let diffX = this.x - mouseX;
       let diffY = this.y - mouseY;
-      if(diffX > 0) this.x--; else this.x++;
-      if (diffY > 0) this.y--; else this.y++;
+      // if(diffX > 0) this.x--; else this.x++;
+      // if (diffY > 0) this.y--; else this.y++;
+      this.x += (diffX > 0) ? -1 : 1;
+      this.y += (diffY > 0) ? -1 : 1;
     } else if (prob < 0.6) {
       this.x++;
     } else if (prob < 0.7) {
