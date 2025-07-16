@@ -1,78 +1,69 @@
-let walker;
+let buttons = [];
+let back_button;
+let state;
 
 function setup() {
   createCanvas(800, 500);
-  background('yellow');
-  walker = new Walker();
+  background(0);
+  createButtons();
 }
 
 function draw() {
-  walker.step();
-  walker.display();
+  checkButtonPressed();
+  drawOnState();
 }
 
-class Walker {
-  constructor() {
-    this.x = width / 2;
-    this.y = height / 2;
+function checkButtonPressed() {
+  back_button.mousePressed(() => {
+    state = 'init';
+    showButtons();
+    back_button.hide();
+    background(0);
+  });
+
+  buttons[0].mousePressed(() => {
+    state = 'i3_random_walk';
+    i3_random_walk_setup();
+    hideButtons();
+    back_button.show();
+  });
+
+  buttons[1].mousePressed(() => {
+    state = 'i4_normal_distribution';
+    i4_normal_distribution_setup();
+    hideButtons();
+    back_button.show();
+  });
+}
+
+function drawOnState() {
+  if (state == 'i3_random_walk') {
+    i3_random_walk_draw();
+  } else if (state == 'i4_normal_distribution') {
+    i4_normal_distribution_draw();
   }
+}
 
-  step() {
-    // let choice = int(random(4));
-    // if (choice == 0) {
-    //   this.x++;
-    // } else if (choice == 1) {
-    //   this.x--;
-    // } else if (choice == 2) {
-    //   this.y++;
-    // } else {
-    //   this.y--;
-    // }
+function createButtons() {
+  back_button = createButton('back');
+  back_button.position(width-50, height-50);
+  back_button.hide();
 
-    // let stepX = int(random(3)) - 1;
-    // let stepY = int(random(3)) - 1;
-    // this.x += stepX;
-    // this.y += stepY;
+  buttons[0] = createButton('i3_random_walk');
+  buttons[0].position(width/2, height/2);
 
-    // let stepX = random(-1, 1)
-    // let stepY = random(-1, 1);
-    // this.x += stepX;
-    // this.y += stepY;
+  buttons[1] = createButton('i4_normal_distribution');
+  buttons[1].position(width/2, height/2+50);
+}
 
-    // let prob = random(1);
-    // if (prob < 0.5) {
-    //   this.x++;
-    // } else if (prob < 0.6) {
-    //   this.x--;
-    // } else if (prob < 0.8) {
-    //   this.y++;
-    // } else {
-    //   this.y--;
-    // }
-
-    // Random Walks Exercise 1.3 - 50% chance of moving in the direction of mouse
-    let prob = random(1);
-    if (prob < 0.5) {
-      let diffX = this.x - mouseX;
-      let diffY = this.y - mouseY;
-      // if(diffX > 0) this.x--; else this.x++;
-      // if (diffY > 0) this.y--; else this.y++;
-      this.x += (diffX > 0) ? -1 : 1;
-      this.y += (diffY > 0) ? -1 : 1;
-    } else if (prob < 0.6) {
-      this.x++;
-    } else if (prob < 0.7) {
-      this.x--;
-    } else if (prob < 0.8) {
-      this.y++;
-    } else {
-      this.y--;
-    }
+function hideButtons() {
+  for(let i=0; i<buttons.length; i++) {
+    buttons[i].hide();
   }
+}
 
-  display() {
-    strokeWeight(2);
-    stroke('red');
-    point(this.x, this.y);
+function showButtons() {
+  for(let i=0; i<buttons.length; i++) {
+    buttons[i].show();
   }
 }
