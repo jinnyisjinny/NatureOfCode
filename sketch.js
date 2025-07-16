@@ -1,9 +1,15 @@
-let buttons = [];
 let back_button;
 let state;
+let buttons = [];
+const buttonNames = [
+  'i3_random_walk',
+  'i4_normal_distribution',
+  'i5_custom_distribution',
+  'i6_perlin_noise',
+];
 
 function setup() {
-  createCanvas(800, 500);
+  createCanvas(1500, 800);
   background(0);
   createButtons();
 }
@@ -41,6 +47,13 @@ function checkButtonPressed() {
     hideButtons();
     back_button.show();
   })
+
+  buttons[3].mousePressed(() => {
+    state = 'i6_perlin_noise';
+    i6_perlin_noise_setup();
+    hideButtons();
+    back_button.show();
+  })
 }
 
 function drawOnState() {
@@ -50,6 +63,8 @@ function drawOnState() {
     i4_normal_distribution_draw();
   } else if (state == 'i5_custom_distribution') {
     i5_custom_distribution_draw();
+  } else if (state == 'i6_perlin_noise') {
+    i6_perlin_noise_draw();
   }
 }
 
@@ -58,14 +73,20 @@ function createButtons() {
   back_button.position(width-50, height-50);
   back_button.hide();
 
-  buttons[0] = createButton('i3_random_walk');
-  buttons[0].position(width/2, height/2);
+  let offsetY = 100;
+  let offsetX = 200;
+  let i = 0;
+  for (let y=10; y<height; y+=offsetY) {
+    for (let x=10; x<width; x+=offsetX) {
+      if (i >= buttonNames.length) {
+        break;
+      }
 
-  buttons[1] = createButton('i4_normal_distribution');
-  buttons[1].position(width/2, height/2+50);
-
-  buttons[2] = createButton('i5_custom_distribution');
-  buttons[2].position(width/2, height/2+100);
+      buttons[i] = createButton(buttonNames[i]);
+      buttons[i].position(x, y);
+      i++;
+    }
+  }
 }
 
 function hideButtons() {
@@ -77,5 +98,13 @@ function hideButtons() {
 function showButtons() {
   for(let i=0; i<buttons.length; i++) {
     buttons[i].show();
+  }
+}
+
+function keyPressed() {
+  if (key === 's' || key === 'S') {
+    noLoop();
+  } else if (key === 'r' || key === 'R') {
+    loop();
   }
 }
