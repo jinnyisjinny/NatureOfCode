@@ -34,6 +34,13 @@ function checkButtonPressed() {
     hideButtons();
     back_button.show();
   });
+
+  buttons[2].mousePressed(() => {
+    state = 'i5_custom_distribution';
+    i5_custom_distribution_setup();
+    hideButtons();
+    back_button.show();
+  })
 }
 
 function drawOnState() {
@@ -41,6 +48,8 @@ function drawOnState() {
     i3_random_walk_draw();
   } else if (state == 'i4_normal_distribution') {
     i4_normal_distribution_draw();
+  } else if (state == 'i5_custom_distribution') {
+    i5_custom_distribution_draw();
   }
 }
 
@@ -54,6 +63,9 @@ function createButtons() {
 
   buttons[1] = createButton('i4_normal_distribution');
   buttons[1].position(width/2, height/2+50);
+
+  buttons[2] = createButton('i5_custom_distribution');
+  buttons[2].position(width/2, height/2+100);
 }
 
 function hideButtons() {
