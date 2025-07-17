@@ -3,14 +3,14 @@ let y;
 let tx = 0;
 let ty = 10000;
 
-function i6_perlin_noise_setup() {
+function i6_perlin_noise_1D_setup() {
     background('#FFFFF0');
     strokeWeight(0.2);
     stroke(0);
     frameRate(40);
 }
 
-function i6_perlin_noise_draw() {
+function i6_perlin_noise_1D_draw() {
     x = map(noise(tx),0,1,0,width);
     y = map(noise(ty),0,1,0,height);
     fill(255);
