@@ -3,6 +3,7 @@ function i4_normal_distribution_setup() {
 }
 
 function i4_normal_distribution_draw() {
+    translate(-width/2, -height/2);
     let num = randomGaussian();
     let sd = 60;
     let mean = width / 2;

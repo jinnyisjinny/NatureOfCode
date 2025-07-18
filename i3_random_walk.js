@@ -2,8 +2,8 @@ let walker;
 
 class Walker {
   constructor() {
-    this.x = width / 2;
-    this.y = height / 2;
+    this.x = 0;
+    this.y = 0;
   }
 
   step() {
