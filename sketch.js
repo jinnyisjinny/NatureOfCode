@@ -91,7 +91,7 @@ function drawOnState() {
 
 function createButtons() {
   back_button = createButton('back');
-  back_button.position(width-50, height-50);
+  back_button.position(0, 0);
   back_button.hide();
 
   let offsetY = 100;
