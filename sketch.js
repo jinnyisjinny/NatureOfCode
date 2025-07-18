@@ -7,10 +7,11 @@ const buttonNames = [
   'i5_custom_distribution',
   'i6_perlin_noise_1D',
   'i6_perlin_noise_2D',
+  'i6_perlin_noise_3D',
 ];
 
 function setup() {
-  createCanvas(1500, 800);
+  createCanvas(1500, 800, WEBGL);
   background(0);
   createButtons();
 }
@@ -23,10 +24,10 @@ function draw() {
 function checkButtonPressed() {
   back_button.mousePressed(() => {
     state = 'init';
+    resizeCanvas(1500, 800);
     showButtons();
     back_button.hide();
     background(0);
-    resizeCanvas(1500, 800);
   });
 
   buttons[0].mousePressed(() => {
@@ -63,6 +64,13 @@ function checkButtonPressed() {
     hideButtons();
     back_button.show();
   })
+
+  buttons[5].mousePressed(() => {
+    state = 'i6_perlin_noise_3D';
+    i6_perlin_noise_3D_setup();
+    hideButtons();
+    back_button.show();
+  })
 }
 
 function drawOnState() {
@@ -76,6 +84,8 @@ function drawOnState() {
     i6_perlin_noise_draw();
   } else if (state == 'i6_perlin_noise_2D') {
     i6_perlin_noise_2D_draw();
+  } else if (state == 'i6_perlin_noise_3D') {
+    i6_perlin_noise_3D_draw();
   }
 }
 
