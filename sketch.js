@@ -11,7 +11,7 @@ const buttonNames = [
 ];
 
 function setup() {
-  createCanvas(1500, 800, WEBGL);
+  createCanvas(windowWidth, windowHeight, WEBGL);
   background(0);
   createButtons();
 }
@@ -53,7 +53,7 @@ function checkButtonPressed() {
 
   buttons[3].mousePressed(() => {
     state = 'i6_perlin_noise_1D';
-    i6_perlin_noise_setup();
+    i6_perlin_noise_1D_setup();
     hideButtons();
     back_button.show();
   })
@@ -81,7 +81,7 @@ function drawOnState() {
   } else if (state == 'i5_custom_distribution') {
     i5_custom_distribution_draw();
   } else if (state == 'i6_perlin_noise_1D') {
-    i6_perlin_noise_draw();
+    i6_perlin_noise_1D_draw();
   } else if (state == 'i6_perlin_noise_2D') {
     i6_perlin_noise_2D_draw();
   } else if (state == 'i6_perlin_noise_3D') {
